@@ -29,3 +29,22 @@ function toggleHistoryImage() {
         }
     }
 }
+
+let rating = 0;
+
+$('.rating-button').on('click', function () {
+
+    rating = Number($(this).val());
+    $('#selectedRating').val(rating);
+
+    for (let i = 1; i <= 5; i++) {
+        if (i <= rating) {
+            $('#star' + i).addClass('selected');
+        } else {
+            $('#star' + i).removeClass('selected');
+        }
+        $('#star' + i).attr('aria-pressed', i === rating);
+    }
+
+    $('#storyForm').removeClass('d-none');
+});

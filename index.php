@@ -1,3 +1,28 @@
+<?php
+include "includes/config.php";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $name = trim($_POST["name"]);
+    $rating = (int) $_POST["rating"];
+    $story = trim($_POST["story"]);
+
+    if ($rating >= 1 && $rating <= 5 && $story != "") {
+
+        $name = mysqli_real_escape_string($conn, $name);
+        $story = mysqli_real_escape_string($conn, $story);
+
+        $query = "INSERT INTO reviews (name, rating, story)
+                  VALUES ('$name', '$rating', '$story')";
+
+        mysqli_query($conn, $query);
+
+        header("Location: index.php#memories");
+        exit;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -6,7 +31,7 @@
     <title>Warisan Kuliner Betawi</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -157,8 +182,118 @@
                 </div>
             </div>
         </section>
-        </main>
 
+            <section id="memories" class="section section-alt">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="section-label">
+                        Kenangan tentang Kerak Telor
+                    </span>
+                    <h2>Wall of Memories</h2>
+                    <p class="section-desc">
+                        Ceritakan pengalamanmu makan Kerak Telor.
+                    </p>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-lg-4 mb-4">
+                        <div class="card p-3">
+                            <h3>Bagikan pengalamanmu</h3>
+
+                            <div class="rating-area mt-2">
+                                <p class="rating-question">Bagaimana rasanya?</p>
+
+                                <div class="rating-stars">
+                                    <button id="star1" class="rating-button" value="1" aria-label="1 bintang" aria-pressed="false">★</button>
+                                    <button id="star2" class="rating-button" value="2" aria-label="2 bintang" aria-pressed="false">★</button>
+                                    <button id="star3" class="rating-button" value="3" aria-label="3 bintang" aria-pressed="false">★</button>
+                                    <button id="star4" class="rating-button" value="4" aria-label="4 bintang" aria-pressed="false">★</button>
+                                    <button id="star5" class="rating-button" value="5" aria-label="5 bintang" aria-pressed="false">★</button>
+                                </div>
+                            </div>
+
+                            <form id="storyForm" class="d-none mt-2" method="POST">
+
+                            <input type="hidden" id="selectedRating" name="rating">
+
+                            <label class="form-label w-100">
+                                Nama (opsional)
+
+                                <input id="memoryName"
+                                    name="name"
+                                    type="text"
+                                    class="form-control">
+                            </label>
+
+                            <label class="form-label w-100 mt-2">
+                                2. Pengalamanmu
+
+                                <textarea id="memoryStory"
+                                        name="story"
+                                        class="form-control"
+                                        required></textarea>
+                            </label>
+
+                            <button type="submit" class="btn btn-primary w-100 mt-2">
+                                Kirim cerita
+                            </button>
+
+                        </form>
+
+                            <p id="memoryStatus" class="mt-2"></p>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-8">
+                        <h3 class="mb-4">Cerita pengunjung</h3>
+                        <div id="memoryList" class="row">
+                        <?php
+                        $reviews = mysqli_query(
+                            $conn,
+                            "SELECT * FROM reviews ORDER BY created_at DESC"
+                        );
+
+                        while ($review = mysqli_fetch_assoc($reviews)) {
+                        ?>
+
+                            <div class="col-12 mb-3">
+                                <div class="card p-3">
+
+                                    <h5>
+                                        <?php
+                                        if ($review["name"] == "") {
+                                            echo "Anonim";
+                                        } else {
+                                            echo htmlspecialchars($review["name"]);
+                                        }
+                                        ?>
+                                    </h5>
+
+                                    <div>
+                                        <?php
+                                        echo str_repeat("★", $review["rating"]);
+                                        echo str_repeat("☆", 5 - $review["rating"]);
+                                        ?>
+                                    </div>
+
+                                    <p>
+                                        <?php echo htmlspecialchars($review["story"]); ?>
+                                    </p>
+
+                                </div>
+                            </div>
+
+                        <?php
+                        }
+                        ?>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </main>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
