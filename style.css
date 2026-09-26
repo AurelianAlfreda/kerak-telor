@@ -442,63 +442,44 @@ img {
     flex-shrink: 0;
 }
 
-#memories .card {
-    background-color: var(--cream);
-    color: var(--darkwood);
-    border: 1px solid var(--gold);
+.recommendation-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
 }
 
-#memories h3,
-#memories h4 {
-    font-size: 22px;
+@media (min-width: 992px) {
+    .recommendation-grid {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
-#memories .form-control {
-    background-color: var(--cream);
-    color: var(--darkwood);
-    border: 1px solid var(--terracotta);
+.recommendation-card {
+    background-color: #ffffffd0;
+    border-left: 4px solid var(--terracotta);
+    border-radius: 0 12px 12px 0;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(91, 44, 22, 0.05);
 }
 
-.rating-area {
-    padding: 16px 8px;
-    background-color: var(--sand);
-    border-radius: 12px;
-    text-align: center;
+.recommendation-area {
+    display: inline-block;
+    background-color: var(--terracotta);
+    color: var(--lightgold);
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 12px;
+    margin-bottom: 10px;
 }
 
-.rating-question {
+.recommendation-card h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.recommendation-card p {
+    color: #4a4a4a;
     margin-bottom: 8px;
     font-size: 14px;
-    font-weight: 600;
-}
-
-.rating-stars {
-    display: flex;
-    justify-content: center;
-    gap: 4px;
-}
-
-.rating-button {
-    width: 44px;
-    height: 52px;
-    padding: 0;
-    border: 0;
-    border-radius: 8px;
-    background: none;
-    color: #baa991;
-    font-size: 40px;
-    cursor: pointer;
-}
-
-.rating-button:hover {
-    background-color: var(--cream);
-}
-
-.rating-button.selected {
-    color: #a66b12;
-}
-
-.story-rating {
-    color: #a66b12;
-    font-size: 24px;
 }
