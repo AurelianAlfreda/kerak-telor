@@ -1,66 +1,104 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kerak Telor Jakarta</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warisan Kuliner Betawi</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <section class="faq">
-    <h2>Pertanyaan Seputar Kerak Telor Jakarta</h2>
+    <header class="site-header">
+        <div class="container header-inner">
+            <!-- Logo & Brand -->
+            <div class="brand">
+                <div class="brand-icon">🍴</div>
+                <div>
+                    <span class="brand-title">Kerak Telor</span>
+                    <span class="brand-subtitle">Legenda Betawi</span>
+                </div>
+            </div>
 
-    <div class="faq-item">
-      <button type="button" class="faq-question">
-        Apa itu kerak telor?
-      </button>
-      <div class="faq-answer">
-        <p>
-          Kerak telor adalah makanan tradisional khas Betawi,
-          Jakarta, yang memiliki cita rasa gurih.
-        </p>
-      </div>
-    </div>
+            <!-- Navigasi Desktop -->
+            <nav class="main-nav" id="mainNav">
+                <a href="#pengenalan" class="nav-link">Pengenalan</a>
+                <a href="#sejarah" class="nav-link">Sejarah</a>
+                <a href="#pembuatan" class="nav-link">Cara Pembuatan</a>
+                <a href="#rekomendasi" class="nav-link">Rekomendasi Tempat</a>
+                <a href="#memories" class="nav-link">Wall of Memories</a>
+            </nav>
 
-    <div class="faq-item">
-      <button type="button" class="faq-question">
-        Apa saja bahan utama kerak telor?
-      </button>
-      <div class="faq-answer">
-        <p>
-          Kerak telor umumnya dibuat dari beras ketan putih,
-          telur, ebi, dan bumbu, lalu diberi taburan kelapa
-          sangrai berbumbu serta bawang goreng.
-        </p>
-      </div>
-    </div>
+            <!-- Tombol menu untuk tampilan mobile -->
+            <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Buka menu navigasi" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </header>
 
-    <div class="faq-item">
-      <button type="button" class="faq-question">
-        Telur apa yang digunakan untuk membuat kerak telor?
-      </button>
-      <div class="faq-answer">
-        <p>
-          Kerak telor dapat dibuat menggunakan telur ayam
-          atau telur bebek.
-        </p>
-      </div>
-    </div>
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 class="hero-title">Kelezatan Otentik <em>Kerak Telor</em> Betawi</h1>
+            <p class="hero-desc">
+                Menyusuri jejak aroma arang, gurihnya kelapa sangrai, dan kehangatan tradisi
+                kuliner tempo doeloe yang tetap abadi di jantung Jakarta.
+            </p>
+            <div class="hero-buttons">
+                <a href="#pengenalan" class="btn btn-primary">Jelajahi Kelezatan &darr;</a>
+            </div>
+        </div>
+    </section>
 
-    <div class="faq-item">
-      <button type="button" class="faq-question">
-        Bagaimana kerak telor biasanya disajikan?
-      </button>
-      <div class="faq-answer">
-        <p>
-          Kerak telor biasanya disajikan hangat dengan
-          taburan kelapa sangrai berbumbu dan bawang goreng.
-        </p>
-      </div>
-    </div>
-  </section>
+    <main>
+        <section id="pengenalan" class="section">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Apa itu Kerak Telor?</h2>
+                </div>
 
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="script.js"></script>
+                <div class="two-col">
+                    <!-- Kartu Gambar -->
+                    <figure class="img-card">
+                        <img src="images/kerak-telor-utama.jpeg" alt="Kerak Telor Betawi" width="800" height="500">
+                        <figcaption>
+                            "Perpaduan sempurna ketan putih, telur bebek, ebi gurih, dan serundeng kelapa khas."
+                        </figcaption>
+                    </figure>
+
+                    <!-- Deskripsi -->
+                    <div class="text-block">
+                        <h3>Mahakarya Kuliner Tradisional Asli Jakarta</h3>
+                        <p>
+                            <strong>Kerak Telor</strong> adalah makanan asli daerah Jakarta (Betawi), yang terbuat
+                            dari bahan-bahan utama beras ketan putih, telur ayam atau bebek, ebi (udang kering
+                            yang diasinkan dan disangrai kering), ditambah bawang merah goreng, lalu diberi bumbu
+                            halus khusus.
+                        </p>
+
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">🌾</div>
+                                <div>
+                                    <h4>Beras Ketan Berkualitas</h4>
+                                    <p>Dimasak pulen di atas wajan khusus tanpa minyak.</p>
+                                </div>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">🔥</div>
+                                <div>
+                                    <h4>Serundeng &amp; Ebi</h4>
+                                    <p>Memberikan aroma harum khas yang menggugah selera.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
