@@ -14,3 +14,18 @@ navLinks.forEach(function (link) {
         mainNav.classList.remove('open');
     });
 });
+
+function toggleHistoryImage() {
+    const card = document.getElementById('interactiveCard');
+    const btnHide = document.getElementById('btnHideImg');
+
+    if (card && btnHide) {
+        card.classList.toggle('is-revealed');
+
+        if (card.classList.contains('is-revealed')) {
+            btnHide.classList.add('show');
+        } else {
+            btnHide.classList.remove('show');
+        }
+    }
+}
