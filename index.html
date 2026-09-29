@@ -289,7 +289,77 @@
                     </div>
                 </div>
             </section>
+                        <section id="memories" class="section section-alt">
+            <div class="container">
 
+                <div class="section-heading">
+                    <span class="section-label">Kenangan tentang Kerak Telor</span>
+                    <h2>Wall of Memories</h2>
+                    <p class="section-desc">
+                        Beri rating dan bagikan pengalamanmu tentang Kerak Telor.
+                    </p>
+                </div>
+
+                <div class="memory-layout">
+
+                    <div class="memory-form-card">
+                        <h3>Bagikan pengalamanmu</h3>
+
+                        <div class="rating-area">
+                            <p class="rating-question">Rating</p>
+
+                            <div class="rating-stars">
+                                <button type="button" class="rating-button" value="1">★</button>
+                                <button type="button" class="rating-button" value="2">★</button>
+                                <button type="button" class="rating-button" value="3">★</button>
+                                <button type="button" class="rating-button" value="4">★</button>
+                                <button type="button" class="rating-button" value="5">★</button>
+                            </div>
+                        </div>
+
+                        <form id="storyForm" class="d-none">
+
+                            <label>
+                                Nama (opsional)
+                                <input
+                                    type="text"
+                                    id="memoryName"
+                                    placeholder="Kosongkan jika ingin anonim"
+                                >
+                            </label>
+
+                            <label>
+                                Ulasan
+                                <textarea
+                                    id="memoryStory"
+                                    placeholder="Tuliskan ulasanmu..."
+                                    required
+                                ></textarea>
+                            </label>
+
+                            <button type="submit" class="memory-submit">
+                                Kirim Ulasan
+                            </button>
+
+                        </form>
+
+                        <p id="memoryStatus"></p>
+                    </div>
+
+                    <div class="memory-list-area">
+                        <h3>Ulasan Pengunjung</h3>
+
+                        <div id="memoryList" class="memory-list">
+                            <p id="emptyMemory" class="empty-memory">
+                                Belum ada ulasan.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
         </main>
 
     <script src="script.js"></script>
