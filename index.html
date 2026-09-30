@@ -7,6 +7,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <link rel="icon" type="image/jpeg" href="images/logo.jpeg">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,7 +16,7 @@
         <div class="container header-inner">
             <!-- Logo & Brand -->
             <div class="brand">
-                <div class="brand-icon">🍴</div>
+                <img src="images/logo.jpeg" alt="Logo Kerak Telor" class="brand-logo">
                 <div>
                     <span class="brand-title">Kerak Telor</span>
                     <span class="brand-subtitle">Legenda Betawi</span>
@@ -23,13 +24,15 @@
             </div>
 
             <!-- Navigasi Desktop -->
-            <nav class="main-nav" id="mainNav">
+             <nav class="main-nav" id="mainNav">
                 <a href="#pengenalan" class="nav-link">Pengenalan</a>
                 <a href="#sejarah" class="nav-link">Sejarah</a>
                 <a href="#pembuatan" class="nav-link">Cara Pembuatan</a>
-                <a href="#rekomendasi" class="nav-link">Rekomendasi Tempat</a>
-                <a href="#memories" class="nav-link">Wall of Memories</a>
-            </nav>
+                 <a href="tutorial.html" class="nav-link">Tutorial Video</a>
+                 <a href="#rekomendasi" class="nav-link">Rekomendasi Tempat</a>
+                 <a href="#memories" class="nav-link">Wall of Memories</a>
+                </nav>
+   
 
             <!-- Tombol menu untuk tampilan mobile -->
             <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Buka menu navigasi" aria-expanded="false">
@@ -79,14 +82,12 @@
 
                         <div class="feature-grid">
                             <div class="feature-card">
-                                <div class="feature-icon">🌾</div>
                                 <div>
                                     <h4>Beras Ketan Berkualitas</h4>
                                     <p>Dimasak pulen di atas wajan khusus tanpa minyak.</p>
                                 </div>
                             </div>
                             <div class="feature-card">
-                                <div class="feature-icon">🔥</div>
                                 <div>
                                     <h4>Serundeng &amp; Ebi</h4>
                                     <p>Memberikan aroma harum khas yang menggugah selera.</p>
@@ -97,8 +98,156 @@
                 </div>
             </div>
         </section>
+
+
+
+
+        <section id="sejarah" class="section section-alt">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="section-label">Nostalgia &amp; Asal Usul</span>
+                    <h2>Sejarah &amp; Perjalanan Kerak Telor</h2>
+                </div>
+
+                <div class="history-grid">
+
+                    <div class="history-text-col">
+                        
+                        <div class="timeline-card">
+                            <span class="timeline-year">Era 1920-an</span>
+                            <h3>Awal Mulai Ciptaan Tanpa Sengaja</h3>
+                            <p>
+                                Kerak telor lahir dari kreativitas masyarakat Betawi di kawasan Menteng, Batavia pada tahun 1920-an. Awalnya, warga lokal berupaya memanfaatkan berlimpahnya pohon kelapa dengan meracik adonan ketan dan bumbu tradisional yang dimasak di atas wajan tanpa minyak.
+                            </p>
+                        </div>
+
+                        <div class="timeline-card">
+                            <span class="timeline-year">Era 1970-an</span>
+                            <h3>Menjadi Hidangan Mewah &amp; Ikonik</h3>
+                            <p>
+                                Pada masa kepemimpinan Gubernur Ali Sadikin, keberadaan Kerak Telor mulai diangkat dan dipromosikan sebagai identitas budaya Betawi. Kerak Telor saat itu menjadi santapan berkelas yang kerap dihidangkan dalam acara-acara formal Pemprov DKI Jakarta dan pesta rakyat.
+                            </p>
+                        </div>
+
+                        <div class="timeline-card">
+                            <span class="timeline-year">Masa Kini</span>
+                            <h3>Warisan Budaya yang Tetap Abadi</h3>
+                            <p>
+                                Makanan ini tidak hanya sekadar kuliner lezat, melainkan lambang kehangatan dan keragaman budaya Batavia. Hingga saat ini, Kerak Telor menjadi kuliner wajib yang paling dicari setiap perayaan Hari Ulang Tahun Jakarta maupun event tahunan Pekan Raya Jakarta (PRJ).
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="history-gallery-col">
+                        <div class="history-photo-card">
+                            <img src="images/kerak-telor-abang.jpeg" alt="Sejarah Kerak Telor Era 1920">
+                            <div class="photo-caption">
+                                 "Awal kreasi masyarakat Betawi Menteng memanfaatkan ketan & kelapa."
+                            </div>
+                        </div>
+
+                        <div class="history-photo-card">
+                            <img src="images/masak-kerak-telor-bang.jpeg" alt="Sejarah Kerak Telor Era 1970">
+                            <div class="photo-caption">
+                                "Menjadi sajian ikonik di ajang Pekan Raya Jakarta & acara resmi Pemprov DKI."
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+            <section id="rekomendasi" class="section">
+                <div class="container">
+                    <div class="section-heading">
+                        <span class="section-label">Kuliner Betawi di Jakarta</span>
+                        <h2>Rekomendasi Tempat Kerak Telor</h2>
+                        <p class="section-desc">
+                            Beberapa tempat di Jakarta yang dapat dikunjungi
+                            untuk menikmati kerak telor khas Betawi.
+                        </p>
+                    </div>
+
+                    <div class="recommendation-grid" id="recommendationGrid"></div>
+
+                </div>
+            </section>
+                        <section id="memories" class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">Kenangan tentang Kerak Telor</span>
+                    <h2>Wall of Memories</h2>
+                    <p class="section-desc">
+                        Beri rating dan bagikan pengalamanmu tentang Kerak Telor.
+                    </p>
+                </div>
+
+                <div class="memory-layout">
+
+                    <div class="memory-form-card">
+                        <h3>Bagikan pengalamanmu</h3>
+
+                        <div class="rating-area">
+                            <p class="rating-question">Rating</p>
+
+                            <div class="rating-stars">
+                                <button type="button" class="rating-button" value="1">★</button>
+                                <button type="button" class="rating-button" value="2">★</button>
+                                <button type="button" class="rating-button" value="3">★</button>
+                                <button type="button" class="rating-button" value="4">★</button>
+                                <button type="button" class="rating-button" value="5">★</button>
+                            </div>
+                        </div>
+
+                        <form id="storyForm" class="d-none">
+
+                            <label>
+                                Nama (opsional)
+                                <input
+                                    type="text"
+                                    id="memoryName"
+                                    placeholder="Kosongkan jika ingin anonim"
+                                >
+                            </label>
+
+                            <label>
+                                Ulasan
+                                <textarea
+                                    id="memoryStory"
+                                    placeholder="Tuliskan ulasanmu..."
+                                    required
+                                ></textarea>
+                            </label>
+
+                            <button type="submit" class="memory-submit">
+                                Kirim Ulasan
+                            </button>
+
+                        </form>
+
+                        <p id="memoryStatus"></p>
+                    </div>
+
+                    <div class="memory-list-area">
+                        <h3>Ulasan Pengunjung</h3>
+
+                        <div id="memoryList" class="memory-list">
+                            <p id="emptyMemory" class="empty-memory">
+                                Belum ada ulasan.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
         </main>
 
+    <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
