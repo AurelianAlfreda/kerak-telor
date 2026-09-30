@@ -4,7 +4,6 @@ const ADMIN_PASS = 'admin123';
 const formLogin = document.getElementById('form-login');
 const pesanError = document.getElementById('login-error');
 
-// Kalau sudah login, langsung ke dashboard
 if (sessionStorage.getItem('kt_admin') === 'ya') {
     location.href = 'index.html';
 }

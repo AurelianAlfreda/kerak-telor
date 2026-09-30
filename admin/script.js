@@ -6,7 +6,7 @@ $(document).ready(function () {
         return;
     }
 
-    let hapusTarget = null; // 
+    let hapusTarget = null;
 
     // Teks ulasan berasal dari pengunjung, jadi di-escape agar tidak jadi celah XSS
     function esc(teks) {
