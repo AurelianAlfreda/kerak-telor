@@ -32,19 +32,92 @@ function toggleHistoryImage() {
 
 let rating = 0;
 
-$('.rating-button').on('click', function () {
+const ratingButtons = document.querySelectorAll('.rating-button');
+const storyForm = document.getElementById('storyForm');
+const memoryName = document.getElementById('memoryName');
+const memoryStory = document.getElementById('memoryStory');
+const memoryStatus = document.getElementById('memoryStatus');
+const memoryList = document.getElementById('memoryList');
+const emptyMemory = document.getElementById('emptyMemory');
 
-    rating = Number($(this).val());
-    $('#selectedRating').val(rating);
+ratingButtons.forEach(function (button) {
 
-    for (let i = 1; i <= 5; i++) {
-        if (i <= rating) {
-            $('#star' + i).addClass('selected');
-        } else {
-            $('#star' + i).removeClass('selected');
-        }
-        $('#star' + i).attr('aria-pressed', i === rating);
+    button.addEventListener('click', function () {
+
+        rating = Number(button.value);
+
+        ratingButtons.forEach(function (star) {
+
+            if (Number(star.value) <= rating) {
+                star.classList.add('selected');
+            } else {
+                star.classList.remove('selected');
+            }
+
+        });
+
+        storyForm.classList.remove('d-none');
+        memoryStatus.textContent = '';
+
+    });
+
+});
+
+
+storyForm.addEventListener('submit', function (event) {
+
+    event.preventDefault();
+
+    let nama = memoryName.value.trim();
+    const ulasan = memoryStory.value.trim();
+
+    if (nama === '') {
+        nama = 'Anonim';
     }
 
-    $('#storyForm').removeClass('d-none');
+    if (ulasan === '') {
+        memoryStatus.textContent = 'Ulasan harus diisi.';
+        return;
+    }
+
+    const review = document.createElement('div');
+    review.classList.add('memory-note');
+
+    const namaReview = document.createElement('h4');
+    namaReview.textContent = nama;
+
+    const ratingReview = document.createElement('p');
+    ratingReview.classList.add('story-rating');
+
+    ratingReview.textContent =
+        '★'.repeat(rating) +
+        '☆'.repeat(5 - rating);
+
+    const ulasanReview = document.createElement('p');
+    ulasanReview.classList.add('story-text');
+    ulasanReview.textContent = ulasan;
+
+    review.appendChild(namaReview);
+    review.appendChild(ratingReview);
+    review.appendChild(ulasanReview);
+
+    if (emptyMemory) {
+        emptyMemory.remove();
+    }
+
+    memoryList.prepend(review);
+
+    memoryName.value = '';
+    memoryStory.value = '';
+
+    rating = 0;
+
+    ratingButtons.forEach(function (button) {
+        button.classList.remove('selected');
+    });
+
+    storyForm.classList.add('d-none');
+
+    memoryStatus.textContent = 'Ulasan berhasil ditampilkan.';
+
 });
