@@ -1,3 +1,12 @@
+// Cek login 
+function cekLoginUser() {
+    if (sessionStorage.getItem('kt_user') !== 'ya') {
+        location.replace('loginuser.html');
+    }
+}
+
+cekLoginUser();
+
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const mainNav = document.getElementById('mainNav');
 
@@ -200,3 +209,15 @@ storyForm.addEventListener('submit', function (event) {
 
 muatTempat();
 muatUlasan();
+
+// Logout user
+const tombolLogoutUser = document.getElementById('btn-logout-user');
+
+if (tombolLogoutUser) {
+    tombolLogoutUser.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        sessionStorage.removeItem('kt_user');
+        location.replace('loginuser.html');
+    });
+}
