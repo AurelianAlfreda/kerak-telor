@@ -85,6 +85,18 @@ function buatKartuTempat(tempat) {
         formatRupiah(tempat.hargaMin) + ' - ' + formatRupiah(tempat.hargaMax)
     ));
 
+    const dataTempatAwal = TEMPAT_AWAL.find(function (item) {
+    return item.id === tempat.id;
+    });
+
+    const tombolMaps = document.createElement('a');
+    tombolMaps.href = dataTempatAwal.maps;
+    tombolMaps.target = '_blank';
+    tombolMaps.classList.add('maps-btn');
+    tombolMaps.textContent = '📍 Google Maps';
+
+    card.appendChild(tombolMaps);
+
     return card;
 }
 
