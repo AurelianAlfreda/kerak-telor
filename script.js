@@ -70,6 +70,15 @@ function buatKartuTempat(tempat) {
     const card = document.createElement('div');
     card.classList.add('recommendation-card');
 
+    const dataTempatAwal = TEMPAT_AWAL.find(function (item) {
+        return item.id === tempat.id;
+    });
+
+    const gambar = document.createElement('img');
+    gambar.src = dataTempatAwal.gambar;
+    gambar.alt = tempat.nama;
+    gambar.classList.add('recommendation-image');
+
     const area = document.createElement('span');
     area.classList.add('recommendation-area');
     area.textContent = tempat.area;
@@ -77,6 +86,7 @@ function buatKartuTempat(tempat) {
     const nama = document.createElement('h3');
     nama.textContent = tempat.nama;
 
+    card.appendChild(gambar);
     card.appendChild(area);
     card.appendChild(nama);
     card.appendChild(buatBarisInfo('Alamat:', tempat.alamat));
@@ -84,10 +94,6 @@ function buatKartuTempat(tempat) {
         'Range Harga:',
         formatRupiah(tempat.hargaMin) + ' - ' + formatRupiah(tempat.hargaMax)
     ));
-
-    const dataTempatAwal = TEMPAT_AWAL.find(function (item) {
-    return item.id === tempat.id;
-    });
 
     const tombolMaps = document.createElement('a');
     tombolMaps.href = dataTempatAwal.maps;
