@@ -488,10 +488,6 @@ img {
     margin-bottom: 15px;
 }
 
-#memories {
-    background-color: var(--sand);
-}
-
 .memory-layout {
     display: grid;
     grid-template-columns: 1fr;
