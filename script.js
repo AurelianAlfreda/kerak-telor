@@ -1,6 +1,6 @@
 // Cek login 
 function cekLoginUser() {
-    if (sessionStorage.getItem('kt_user') !== 'ya') {
+    if (sessionStorage.getItem('kt_user_login') !== 'ya') {
         location.replace('loginuser.html');
     }
 }
@@ -235,7 +235,7 @@ if (tombolLogoutUser) {
     tombolLogoutUser.addEventListener('click', function (event) {
         event.preventDefault();
 
-        sessionStorage.removeItem('kt_user');
+        sessionStorage.removeItem('kt_user_login');
         location.replace('loginuser.html');
     });
 }
