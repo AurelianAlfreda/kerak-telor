@@ -1,12 +1,7 @@
-const USER_USERNAME = 'asd';
-const USER_PASSWORD = '123';
+const KUNCI_USER = 'kt_user';
 
 const formLogin = document.getElementById('form-login-user');
 const pesanError = document.getElementById('login-error');
-
-if (sessionStorage.getItem('kt_user') === 'ya') {
-    location.replace('index.html');
-}
 
 formLogin.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -14,8 +9,30 @@ formLogin.addEventListener('submit', function (event) {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    if (username === USER_USERNAME && password === USER_PASSWORD) {
-        sessionStorage.setItem('kt_user', 'ya');
+    const dataUser = localStorage.getItem(KUNCI_USER);
+    let daftarUser = [];
+
+     if (dataUser !== null) {
+        daftarUser = JSON.parse(dataUser);
+    }
+
+    // Cari username dan password yang sesuai
+    const userDitemukan = daftarUser.find(function (user) {
+        return user.username === username &&
+               user.password === password;
+    });
+
+    if (userDitemukan) {
+
+        // Tandai bahwa user sudah login
+        sessionStorage.setItem('kt_user_login', 'ya');
+
+        // Simpan data user yang sedang login
+        sessionStorage.setItem(
+            'kt_user_aktif',
+            JSON.stringify(userDitemukan)
+        );
+
         location.replace('index.html');
         return;
     }
