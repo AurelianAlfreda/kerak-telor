@@ -1,5 +1,46 @@
 const KUNCI_TEMPAT = 'kt_tempat';
 const KUNCI_ULASAN = 'kt_ulasan';
+const KUNCI_SEJARAH = 'kt_data_sejarah';
+
+const SEJARAH_AWAL = [
+    {
+        id: 1,
+        era: "Era 1920-an",
+        judul: "Awal Mulai Ciptaan Tanpa Sengaja",
+        deskripsi: "Kerak telor lahir dari kreativitas masyarakat Betawi di kawasan Menteng, Batavia pada tahun 1920-an. Awalnya, warga lokal berupaya memanfaatkan berlimpahnya pohon kelapa dengan meracik adonan ketan dan bumbu tradisional yang dimasak di atas wajan tanpa minyak.",
+        gambar: "images/sejarah1.jpg",
+        caption: "Awal kreasi masyarakat Betawi Menteng memanfaatkan ketan & kelapa."
+    },
+    {
+        id: 2,
+        era: "Era 1970-an",
+        judul: "Menjadi Hidangan Mewah & Ikonik",
+        deskripsi: "Pada masa kepemimpinan Gubernur Ali Sadikin, keberadaan Kerak Telor mulai diangkat dan dipromosikan sebagai identitas budaya Betawi. Kerak Telor saat itu menjadi santapan berkelas yang kerap dihidangkan dalam acara-acara formal Pemprov DKI Jakarta dan pesta rakyat.",
+        gambar: "images/sejarah2.jpg",
+        caption: "Menjadi sajian ikonik di ajang Pekan Raya Jakarta & acara resmi Pemprov DKI."
+    },
+    {
+        id: 3,
+        era: "Masa Kini",
+        judul: "Warisan Budaya yang Tetap Abadi",
+        deskripsi: "Makanan ini tidak hanya sekadar kuliner lezat, melainkan lambang hangatnya dan keragaman budaya Batavia. Hingga saat ini, Kerak Telor menjadi kuliner wajib yang paling dicari setiap perayaan Hari Ulang Tahun Jakarta maupun event tahunan Pekan Raya Jakarta (PRJ).",
+        gambar: "images/sejarah3.jpg",
+        caption: "Warisan budaya takbenda khas Betawi yang tetap dilestarikan."
+    }
+];
+
+function bacaData(kunci, dataAwal) {
+    const data = localStorage.getItem(kunci);
+    return data ? JSON.parse(data) : dataAwal;
+}
+
+function simpanData(kunci, data) {
+    localStorage.setItem(kunci, JSON.stringify(data));
+}
+
+function buatIdBaru(daftar) {
+    return daftar.length ? Math.max(...daftar.map(d => d.id)) + 1 : 1;
+}
 
 // Data awal rekomendasi tempat (dipakai saat localStorage masih kosong)
 const TEMPAT_AWAL = [

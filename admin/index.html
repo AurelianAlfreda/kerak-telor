@@ -29,6 +29,11 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                 </a>
             </li>
             <li class="nav-item mb-2">
+                <a href="#" data-target="tab-sejarah" class="nav-link text-white">
+                    Kelola Sejarah
+                </a>
+            </li>
+            <li class="nav-item mb-2">
                 <a href="#" data-target="tab-ulasan" class="nav-link text-white">
                     Kelola & Moderasi Ulasan
                 </a>
@@ -231,6 +236,62 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                 </div>
             </div>
         </section>
+
+        <!-- KELOLA SEJARAH -->
+<section id="tab-sejarah" class="tab-section">
+    <div class="card shadow-sm border-0 p-4 mb-4">
+        <h1 id="judul-form-sejarah" class="fs-4 fw-bold mb-4">Tambah / Edit Sejarah</h1>
+        <form id="form-sejarah">
+            <input type="hidden" id="edit_id_sejarah">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Era / Tahun</label>
+                    <input type="text" id="sejarah_era" class="form-control" placeholder="Contoh: Era 1920-an" required>
+                </div>
+                <div class="col-md-8">
+                    <label class="form-label fw-semibold">Judul Periode</label>
+                    <input type="text" id="sejarah_judul" class="form-control" placeholder="Contoh: Awal Mulai Ciptaan Tanpa Sengaja" required>
+                </div>
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Deskripsi Sejarah</label>
+                    <textarea id="sejarah_deskripsi" class="form-control" rows="3" placeholder="Tuliskan cerita sejarah..." required></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">URL / Jalur Gambar</label>
+                    <input type="text" id="sejarah_gambar" class="form-control" placeholder="Contoh: images/sejarah1.jpg atau https://..." required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Caption / Teks Gambar</label>
+                    <input type="text" id="sejarah_caption" class="form-control" placeholder="Contoh: Awal kreasi masyarakat Betawi Menteng..." required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-kt w-100 fw-bold mt-4" id="btn-sejarah-submit">Simpan ke Database</button>
+            <button type="button" class="btn btn-secondary w-100 fw-bold mt-2 d-none" id="btn-sejarah-cancel">Batal Edit</button>
+        </form>
+    </div>
+
+    <div class="card shadow-sm border-0 p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+            <h2 class="fs-5 fw-bold m-0">Daftar Sejarah</h2>
+            <button type="button" id="btn-reset-sejarah" class="btn btn-outline-secondary btn-sm">Kembalikan Data Awal</button>
+        </div>
+        <div class="table-responsive">
+            <table id="tabel-sejarah" class="table table-striped table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Gambar</th>
+                        <th>Era</th>
+                        <th>Judul & Deskripsi</th>
+                        <th>Caption Gambar</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</section>
 
     </main>
 
