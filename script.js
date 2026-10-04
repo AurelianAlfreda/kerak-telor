@@ -239,3 +239,52 @@ if (tombolLogoutUser) {
         location.replace('loginuser.html');
     });
 }
+
+// sejarah
+function tampilkanSejarahWebsite() {
+    const dataSejarah = (typeof bacaData === 'function') 
+        ? bacaData(KUNCI_SEJARAH, SEJARAH_AWAL) 
+        : JSON.parse(localStorage.getItem(KUNCI_SEJARAH)) || SEJARAH_AWAL;
+
+    const container = document.getElementById('konten-sejarah');
+    if (!container) return;
+
+    if (!dataSejarah || dataSejarah.length === 0) {
+        container.innerHTML = '<p class="text-center">Belum ada data sejarah.</p>';
+        return;
+    }
+
+    let teksHTML = '<div class="history-text-col">';
+    dataSejarah.forEach(s => {
+        teksHTML += `
+            <div class="timeline-card">
+                <span class="timeline-year">${s.era || ''}</span>
+                <h3>${s.judul || ''}</h3>
+                <p>${s.deskripsi || ''}</p>
+            </div>
+        `;
+    });
+    teksHTML += '</div>';
+
+    let gambarHTML = '<div class="history-gallery-col">';
+    
+    const fotoDuaBiji = dataSejarah.slice(0, 2);
+    
+    fotoDuaBiji.forEach(s => {
+        if (s.gambar) {
+            gambarHTML += `
+                <div class="history-photo-card">
+                    <img src="${s.gambar}" alt="${s.judul || ''}">
+                    <div class="photo-caption">
+                        "${s.caption || ''}"
+                    </div>
+                </div>
+            `;
+        }
+    });
+    gambarHTML += '</div>';
+
+    container.innerHTML = teksHTML + gambarHTML;
+}
+
+document.addEventListener('DOMContentLoaded', tampilkanSejarahWebsite);
