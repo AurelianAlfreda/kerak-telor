@@ -1,5 +1,6 @@
 <?php
 session_start();
+// Fitur Keamanan Login - Cek apakah admin sudah login
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header('Location: login.php');
     exit;
@@ -17,6 +18,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 </head>
 <body class="bg-light d-flex vh-100">
 
+    <!-- SIDEBAR -->
     <aside class="sidebar text-white p-3 d-flex flex-column shadow-sm">
         <img src="../images/logo.jpeg" alt="Logo Kerak Telor" class="admin-logo">
         <h2 class="text-center mb-4 fs-4 fw-bold">Admin Kerak Telor</h2>
@@ -36,30 +38,25 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                     Kelola Tempat
                 </a>
             </li>
-
             <li class="nav-item mb-2">
                 <a href="#" data-target="tab-video" class="nav-link text-white">
                     Kelola Video YouTube
                 </a>
             </li>
-            <li class="nav-item mb-2">
-                <a href="#" data-target="tab-gambar" class="nav-link text-white">
-                    Kelola Gambar Web
-                </a>
-            </li>
         </ul>
-
         <a href="logout.php" id="btn-logout" class="btn btn-outline-light btn-sm mt-3">
             Keluar
         </a>
     </aside>
 
+    <!-- KONTEN UTAMA -->
     <main class="flex-grow-1 p-4 overflow-auto">
         <button id="sidebar-toggle" class="btn btn-dark d-md-none mb-4 shadow-sm">
             ☰ Menu Admin
         </button>
         <div id="sidebar-overlay"></div>
 
+        <!-- STATISTIK & RINGKASAN -->
         <section id="tab-statistik" class="tab-section active">
             <h1 class="mb-4 fw-bold fs-3">Statistik Website</h1>
             <div class="row g-4 mb-4">
@@ -69,7 +66,6 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                         <div id="angka-ulasan" class="fs-2 fw-bold">0</div>
                     </div>
                 </div>
-
                 <div class="col-md-2-4 col-sm-6">
                     <div class="card shadow-sm border-0 text-center p-3 border-start border-warning border-4">
                         <h3 class="fs-6 text-muted mb-2">Ulasan Pending</h3>
@@ -88,7 +84,6 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                         <div id="angka-tempat" class="fs-2 fw-bold">0</div>
                     </div>
                 </div>
-
                 <div class="col-md-2-4 col-sm-6">
                     <div class="card shadow-sm border-0 text-center p-3">
                         <h3 class="fs-6 text-muted mb-2">Total Video</h3>
@@ -113,6 +108,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
             </div>
         </section>
 
+        <!-- KELOLA & MODERASI ULASAN -->
         <section id="tab-ulasan" class="tab-section">
             <div class="card shadow-sm border-0 p-4">
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
@@ -128,33 +124,17 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                                 <th>Rating</th>
                                 <th>Ulasan</th>
                                 <th>Tanggal</th>
-                                <th>Status</th> <!-- Kolom Pending / Approved -->
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!-- Contoh baris data ulasan moderasi -->
-                            <!--
-                            <tr>
-                                <td>1</td>
-                                <td>Budi</td>
-                                <td>5 ★</td>
-                                <td>Enak banget!</td>
-                                <td>2026-10-01</td>
-                                <td><span class="badge bg-warning text-dark">Pending</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-success">Setujui</button>
-                                    <button class="btn btn-sm btn-primary">Edit</button>
-                                    <button class="btn btn-sm btn-danger">Hapus</button>
-                                </td>
-                            </tr>
-                            -->
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
         </section>
 
+        <!-- KELOLA TEMPAT -->
         <section id="tab-tempat" class="tab-section">
             <div class="card shadow-sm border-0 p-4 mb-4">
                 <h1 id="judul-form-tempat" class="fs-4 fw-bold mb-4">Tambah Tempat Baru</h1>
@@ -216,6 +196,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
             </div>
         </section>
 
+        <!-- KELOLA VIDEO YOUTUBE -->
         <section id="tab-video" class="tab-section">
             <div class="card shadow-sm border-0 p-4 mb-4">
                 <h1 class="fs-4 fw-bold mb-4">Tambah Video Pembuatan Kerak Telor</h1>
@@ -251,31 +232,9 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
             </div>
         </section>
 
-        <section id="tab-gambar" class="tab-section">
-            <div class="card shadow-sm border-0 p-4 mb-4">
-                <h1 class="fs-4 fw-bold mb-4">Unggah / Ganti Gambar Website</h1>
-                <form id="form-gambar" action="proses_gambar.php" method="POST" enctype="multipart/form-data">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label fw-semibold">Pilih Posisi / Kategori Gambar</label>
-                            <select name="kategori_gambar" class="form-select" required>
-                                <option value="logo">Logo Website</option>
-                                <option value="banner">Banner Utama (Hero Image)</option>
-                                <option value="galeri">Galeri Foto</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label fw-semibold">File Gambar Baru</label>
-                            <input type="file" name="file_gambar" class="form-control" accept="image/*" required>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-kt w-100 fw-bold mt-4">Unggah Gambar</button>
-                </form>
-            </div>
-        </section>
-
     </main>
 
+    <!-- MODAL KONFIRMASI HAPUS -->
     <div class="modal fade" id="modalKonfirmasiHapus" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg">
