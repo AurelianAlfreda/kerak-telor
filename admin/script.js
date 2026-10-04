@@ -41,6 +41,7 @@ $(document).ready(function () {
     // Akses data
     const ambilTempat = () => bacaData(KUNCI_TEMPAT, TEMPAT_AWAL);
     const ambilUlasan = () => bacaData(KUNCI_ULASAN, []);
+    const ambilSejarah = () => bacaData(KUNCI_SEJARAH, SEJARAH_AWAL);
 
     $('#sidebar-toggle').on('click', function () {
         $('.sidebar').addClass('show');
@@ -65,6 +66,7 @@ $(document).ready(function () {
         // Muat ulang data tab yang dibuka supaya selalu terbaru
         const target = $(this).data('target');
         if (target === 'tab-statistik') muatStatistik();
+        if (target === 'tab-sejarah') muatSejarah();
         if (target === 'tab-ulasan') muatUlasan();
         if (target === 'tab-tempat') muatTempat();
     });
@@ -221,8 +223,16 @@ $(document).ready(function () {
     $('#btn-modal-hapus').on('click', function () {
         if (!hapusTarget) return;
 
-        const kunci = hapusTarget.jenis === 'ulasan' ? KUNCI_ULASAN : KUNCI_TEMPAT;
-        const dataAwal = hapusTarget.jenis === 'ulasan' ? [] : TEMPAT_AWAL;
+        let kunci = KUNCI_TEMPAT;
+        let dataAwal = TEMPAT_AWAL;
+
+        if (hapusTarget.jenis === 'ulasan') {
+            kunci = KUNCI_ULASAN;
+            dataAwal = [];
+        } else if (hapusTarget.jenis === 'sejarah') {
+            kunci = KUNCI_SEJARAH;
+            dataAwal = SEJARAH_AWAL;
+        }
 
         // Buang item yang id-nya cocok, simpan sisanya
         const sisa = bacaData(kunci, dataAwal).filter(item => item.id !== hapusTarget.id);
@@ -233,8 +243,93 @@ $(document).ready(function () {
 
         if (hapusTarget.jenis === 'ulasan') {
             muatUlasan();
-        } else {
+        } else if (hapusTarget.jenis === 'sejarah') muatSejarah();
+        else {
             muatTempat();
+        }
+    });
+
+    // FUNGSI KELOLA SEJARAH 
+    function muatSejarah() {
+        const rows = ambilSejarah().map(s => `
+            <tr>
+                <td>${s.id}</td>
+                <td>
+                    <img src="${esc(s.gambar)}" alt="${esc(s.judul)}" style="width: 60px; height: 45px; object-fit: cover; border-radius: 4px;">
+                </td>
+                <td><span class="badge text-bg-warning">${esc(s.era)}</span></td>
+                <td>
+                    <strong>${esc(s.judul)}</strong>
+                    <p class="small text-muted mb-0">${esc(s.deskripsi)}</p>
+                </td>
+                <td><small class="fst-italic text-secondary">"${esc(s.caption)}"</small></td>
+                <td class="text-nowrap">
+                    <button class="btn btn-sm btn-warning btn-edit-sejarah" data-id="${s.id}">Edit</button>
+                    <button class="btn btn-sm btn-danger btn-hapus" data-jenis="sejarah" data-id="${s.id}">Hapus</button>
+                </td>
+            </tr>`).join('');
+        $('#tabel-sejarah tbody').html(rows || '<tr><td colspan="6" class="text-center text-muted">Belum ada data sejarah.</td></tr>');
+    }
+
+    function resetFormSejarah() {
+        $('#form-sejarah')[0].reset();
+        $('#edit_id_sejarah').val('');
+        $('#judul-form-sejarah').text('Tambah / Edit Sejarah');
+        $('#btn-sejarah-submit').text('Simpan ke Database');
+        $('#btn-sejarah-cancel').addClass('d-none');
+    }
+
+    $('#form-sejarah').on('submit', function (e) {
+        e.preventDefault();
+
+        const id = Number($('#edit_id_sejarah').val());
+        const daftar = ambilSejarah();
+        const dataForm = {
+            era: $('#sejarah_era').val().trim(),
+            judul: $('#sejarah_judul').val().trim(),
+            deskripsi: $('#sejarah_deskripsi').val().trim(),
+            gambar: $('#sejarah_gambar').val().trim(),
+            caption: $('#sejarah_caption').val().trim()
+        };
+
+        if (id) {
+            const item = daftar.find(s => s.id === id);
+            Object.assign(item, dataForm);
+            notif('Data & Gambar sejarah berhasil diperbarui!');
+        } else {
+            daftar.push({ id: buatIdBaru(daftar), ...dataForm });
+            notif('Sejarah baru berhasil ditambahkan!');
+        }
+
+        simpanData(KUNCI_SEJARAH, daftar);
+        resetFormSejarah();
+        muatSejarah();
+    });
+
+    $(document).on('click', '.btn-edit-sejarah', function () {
+        const s = ambilSejarah().find(x => x.id === Number($(this).data('id')));
+
+        $('#edit_id_sejarah').val(s.id);
+        $('#sejarah_era').val(s.era);
+        $('#sejarah_judul').val(s.judul);
+        $('#sejarah_deskripsi').val(s.deskripsi);
+        $('#sejarah_gambar').val(s.gambar);
+        $('#sejarah_caption').val(s.caption);
+
+        $('#judul-form-sejarah').text('Edit Sejarah');
+        $('#btn-sejarah-submit').text('Update Sejarah');
+        $('#btn-sejarah-cancel').removeClass('d-none');
+        $('main').animate({ scrollTop: 0 }, 300);
+    });
+
+    $('#btn-sejarah-cancel').on('click', resetFormSejarah);
+
+    $('#btn-reset-sejarah').on('click', function () {
+        if (confirm('Kembalikan sejarah ke data awal? Perubahan yang sudah dibuat akan hilang.')) {
+            simpanData(KUNCI_SEJARAH, SEJARAH_AWAL);
+            resetFormSejarah();
+            muatSejarah();
+            notif('Data sejarah dikembalikan ke data awal.');
         }
     });
 
